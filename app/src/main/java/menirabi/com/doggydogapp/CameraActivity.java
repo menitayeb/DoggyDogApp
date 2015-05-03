@@ -34,7 +34,7 @@ public class CameraActivity extends Activity {
     Camera camera;
     Activity act;
     Context ctx;
-    Button buttonClick3;
+    String orabi = "whatsuptest";
     Button buttonClick1;
     Button buttonClick2;
     Button buttonClick6;
