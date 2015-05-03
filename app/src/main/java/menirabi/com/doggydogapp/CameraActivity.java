@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -86,7 +87,22 @@ public class CameraActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                camera.getParameters().setRotation(90);
+                Camera.CameraInfo info = new Camera.CameraInfo();
+                Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
+                int rotation = CameraActivity.this.getWindowManager().getDefaultDisplay().getRotation();
+                int degrees = 0;
+                switch (rotation) {
+                    case Surface.ROTATION_0: degrees = 0; break; //Natural orientation
+                    case Surface.ROTATION_90: degrees = 90; break; //Landscape left
+                    case Surface.ROTATION_180: degrees = 180; break;//Upside down
+                    case Surface.ROTATION_270: degrees = 270; break;//Landscape right
+                }
+                int rotate = (info.orientation - degrees + 360) % 360;
+
+//STEP #2: Set the 'rotation' parameter
+                Camera.Parameters params = camera.getParameters();
+                params.setRotation(rotate);
+                camera.setParameters(params);
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
             }
         });
