@@ -3,6 +3,7 @@ package menirabi.com.doggydogapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -37,13 +39,14 @@ import java.util.List;
 public class CameraActivity extends Activity {
     private static final String TAG = "CameraActivity";
     Preview preview;
-    Button buttonClick;
     Camera camera;
     Activity act;
     Context ctx;
     Button buttonClick1;
     Button buttonClick2;
     Button buttonClick6;
+    String def = "defaullt";
+    private int barksType = 0;
     Context context;
     private final ShutterCallback shutterCallback = new ShutterCallback() {
         public void onShutter() {
@@ -75,11 +78,31 @@ public class CameraActivity extends Activity {
             }
         };
 
+        // Dog Bark Sounds
         buttonClick1 = (Button) findViewById(R.id.buttonClick1);
         buttonClick1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
+                MediaPlayer mp;
+                barksType = getSharedPreferences("DoggyDog_BGU", MODE_PRIVATE).getInt(def, 0);
+                switch (barksType){
+                    case 0:
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
+                        Toast.makeText(getApplicationContext(),"this is 1", Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
+                        Toast.makeText(getApplicationContext(),"this is 2", Toast.LENGTH_LONG).show();
+                        break;
+                    case 2:
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
+                        Toast.makeText(getApplicationContext(),"this is 3", Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
+                        Toast.makeText(getApplicationContext(),"this is default", Toast.LENGTH_LONG).show();
+                        break;
+                }
                 mp.start();
             }
         });
@@ -88,6 +111,17 @@ public class CameraActivity extends Activity {
         CustomAdapter<String> adapter = new CustomAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, new String[] {"Entry 1", "Entry 2", "Entry 3"});
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SharedPreferences prefs = getSharedPreferences("DoggyDog_BGU", MODE_PRIVATE);
+                prefs.edit().putInt(def, position).commit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         buttonClick6 = (Button) findViewById(R.id.buttonClick6);
         buttonClick6.setOnClickListener(new View.OnClickListener() {
@@ -138,25 +172,6 @@ public class CameraActivity extends Activity {
         });
 
 
-//        preview.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//                camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-//            }
-//        });
-
-        Toast.makeText(ctx, getString(R.string.take_photo_help), Toast.LENGTH_LONG).show();
-
-        //		buttonClick = (Button) findViewById(R.id.btnCapture);
-        //
-//        		buttonClick.setOnClickListener(new OnClickListener() {
-        //			public void onClick(View v) {
-        ////				preview.camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-        //				camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-        //			}
-        //		});
-        //
 //        		buttonClick2.setOnLongClickListener(new View.OnLongClickListener(){
 //        			@Override
 //        			public boolean onLongClick(View arg0) {
@@ -208,12 +223,6 @@ public class CameraActivity extends Activity {
         mediaScanIntent.setData(Uri.fromFile(file));
         sendBroadcast(mediaScanIntent);
     }
-
-
-
-
-
-
 
     PictureCallback rawCallback = new PictureCallback() {
         public void onPictureTaken(byte[] data, Camera camera) {

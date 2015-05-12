@@ -30,7 +30,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 public class UILApplication extends Application {
     private GraphUser                 fbGraphUser;
-    private SharedPreferences         sp;
+    private static SharedPreferences         sp;
     public static final String        FACEBOOK_USER_ID                                 = "FACEBOOK_USER_ID";
     public static final String        FACEBOOK_USER_NAME                               = "FACEBOOK_USER_NAME";
     public static final String        FACEBOOK_ACCESS_TOKEN                            = "FACEBOOK_ACCESS_TOKEN";
@@ -73,7 +73,7 @@ public class UILApplication extends Application {
     {
         this.fbGraphUser = fbGraphUser;
     }
-    public SharedPreferences getSp()
+    public static SharedPreferences getSp()
     {
         return sp;
     }
