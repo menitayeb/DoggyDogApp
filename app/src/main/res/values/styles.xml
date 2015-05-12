@@ -17,4 +17,13 @@
     <style name="ProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal"/>
 
 
+    <!-- camera spinner dropdownlist styling -->
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    </style>
+
 </resources>

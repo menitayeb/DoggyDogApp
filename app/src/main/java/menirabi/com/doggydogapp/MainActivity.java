@@ -91,6 +91,7 @@ public class MainActivity extends ActionBarActivity implements SlidesFragment.On
             MainActivity.this.finish();
         }
 
+
         /*First Fragment*/
         Fragment fragment;
         fragment = new SlidesFragment();
@@ -100,6 +101,7 @@ public class MainActivity extends ActionBarActivity implements SlidesFragment.On
         fragmentTransaction.add(R.id.container, fragment, fragment.getClass().getName());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
 
         /*hold a list of fragments*/
         fragmentList = new ArrayList<Fragment>();
@@ -122,48 +124,13 @@ public class MainActivity extends ActionBarActivity implements SlidesFragment.On
 
         });
 
-
-//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-//                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
-//
-//                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
-//                    Drawer.closeDrawers();
-//                    //Toast.makeText(MainActivity.this,"The Item Clicked is: "+recyclerView.getChildPosition(child),Toast.LENGTH_SHORT).show();
-//                  //  FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                   // Fragment fragment = new SlidesFragment();
-//                   // if (fragmentManager.findFragmentByTag(fragment.getClass().getName()) != null)
-//                    //{
-//                     //   currentFragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
-//                      //  fragmentTransaction.replace(R.id.container, currentFragment, fragment.getClass().getName());
-//                    //}
-//                    //else
-//                   // {
-//                    //    currentFragment = fragment;
-//                     //   //fragmentList.add(currentFragment);
-//                      //  fragmentTransaction.add(R.id.container, currentFragment, fragment.getClass().getName());
-//                    //}
-//                    //fragmentTransaction.addToBackStack(null);
-//                    //fragmentTransaction.commit();
-//                    return true;
-//
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-//
-//            }
-//
-//        });
         /*
         * Camera OnClickListener*/
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
+                                       System.gc();
                                        Intent cameraIntent = new Intent(MainActivity.this, CameraActivity.class);
                                        startActivity(cameraIntent);
                                    }
@@ -224,70 +191,11 @@ public class MainActivity extends ActionBarActivity implements SlidesFragment.On
 
             @Override
             public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-//                Fragment fragment;
-//                int what = (int)recyclerView.getTag();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                switch (what) {
-//                    case 1:
-//                        fragment = new SlidesFragment();
-//
-//                    case 2:
-//                        fragment = new NewsFeedFragment();
-//                    case 3:
-//                    case 4:
-//                    case 5:
-//                        fragment = new EmptyFragment();
-//                    default:
-//                        fragment = new SlidesFragment();
-//                }
-//                if (fragmentManager.findFragmentByTag(fragment.getClass().getName()) != null) {
-//                    currentFragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
-//                    fragmentTransaction.replace(R.id.container, currentFragment, fragment.getClass().getName());
-//                } else {
-//                    currentFragment = fragment;
-//                    //fragmentList.add(currentFragment);
-//                    fragmentTransaction.add(R.id.container, currentFragment, fragment.getClass().getName());
-//                }
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
             }
 
         });
 
 
-//        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Fragment fragment;
-//                int what = v.getId() + 1;
-//                Drawer.closeDrawers();
-//                //Toast.makeText(MainActivity.this,"The Item Clicked is: "+recyclerView.getChildPosition(child),Toast.LENGTH_SHORT).show();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                switch (what) {
-//                    case 1:
-//                        fragment = new SlidesFragment();
-//
-//                    case 2:
-//                        fragment = new NewsFeedFragment();
-//                    case 3:
-//                    case 4:
-//                    case 5:
-//                        fragment = new EmptyFragment();
-//                    default:
-//                        fragment = new SlidesFragment();
-//                }
-//                if (fragmentManager.findFragmentByTag(fragment.getClass().getName()) != null) {
-//                    currentFragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
-//                    fragmentTransaction.replace(R.id.container, currentFragment, fragment.getClass().getName());
-//                } else {
-//                    currentFragment = fragment;
-//                    //fragmentList.add(currentFragment);
-//                    fragmentTransaction.add(R.id.container, currentFragment, fragment.getClass().getName());
-//                }
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
 
 
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
