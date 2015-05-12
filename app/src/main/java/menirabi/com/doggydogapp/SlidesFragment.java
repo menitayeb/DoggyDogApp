@@ -26,6 +26,8 @@ public class SlidesFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    public static final String TAG = "SlidesFragment";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -72,9 +74,9 @@ public class SlidesFragment extends Fragment {
 //        });
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new SampleFragmentPagerAdapter(getFragmentManager() ,
+        viewPager.setAdapter(new SampleFragmentPagerAdapter(getChildFragmentManager() ,
                 getActivity()));
-
+        viewPager.setOffscreenPageLimit(4);
 
 
         // Give the SlidingTabLayout the ViewPager

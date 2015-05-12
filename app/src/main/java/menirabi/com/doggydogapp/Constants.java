@@ -15,9 +15,41 @@
  *******************************************************************************/
 package menirabi.com.doggydogapp;
 
-public final class Constants {
+import android.os.Environment;
 
-	public static final String[] IMAGES = new String[] {
+import java.io.File;
+
+public final class Constants {
+    public static String[] IMAGESALREADY;
+    public static String[] IMAGES;
+    public static void setImageArray(){
+        int i;
+        int k=0;
+        File sdCard = Environment.getExternalStorageDirectory();
+        String path = sdCard.getAbsolutePath() + "/PincturePhothos";
+        File f = new File(path);
+        if(f.isDirectory()) {
+        }
+        else{
+            File dir = new File (sdCard.getAbsolutePath() + "/PincturePhothos");
+            dir.mkdirs();
+            f = new File(path);
+        }
+        File file[] = f.listFiles();
+        IMAGESALREADY = new String[IMAGES_CONSTANT.length +file.length];
+        for (i=0; i < file.length; i++)
+        {
+            IMAGESALREADY[i] = ("file://"+ file[i].toString());
+        }
+        for (int j=i; j < IMAGES_CONSTANT.length+i; j++)
+        {
+            IMAGESALREADY[j] = IMAGES_CONSTANT[k];
+            k++;
+        }
+        IMAGES=IMAGESALREADY;
+    }
+
+	public static String[] IMAGES_CONSTANT = new String[] {
 			// Heavy images
 
             "http://i.imgur.com/b52LX7C.jpg",

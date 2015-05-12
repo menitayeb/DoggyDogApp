@@ -7,6 +7,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ZoomControls;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,14 +42,16 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
             Camera.Parameters params = mCamera.getParameters();
 
             List<String> focusModes = params.getSupportedFocusModes();
-            if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
-                // set the focus mode
+            if (focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+                params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            } else if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
                 params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-                // set Camera parameters
-                mCamera.setParameters(params);
             }
+            mCamera.setParameters(params);
+
         }
     }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -104,6 +107,7 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
             Log.e(TAG, "IOException caused by setPreviewDisplay()", exception);
         }
     }
+
 
     public void surfaceDestroyed(SurfaceHolder holder) {
         // Surface will be destroyed when we return, so stop the preview.

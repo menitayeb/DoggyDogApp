@@ -13,12 +13,14 @@ import android.text.style.ImageSpan;
 /**
  * Created by Oren on 26/04/2015.
  */
-public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
+public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
     public static final String IMAGE_POSITION = "com.nostra13.example.universalimageloader.IMAGE_POSITION";
     public static final String FRAGMENT_INDEX = "com.nostra13.example.universalimageloader.FRAGMENT_INDEX";
-    private String tabTitles[] = new String[] { "Tab1", "Tab2" };
+    private String tabTitles[] = new String[]{"Tab1", "Tab2"};
     private Context context;
+    private Fragment fragmentOne;
+    private Fragment fragmentTwo;
     private int[] imageResId = {
             R.mipmap.tab_one,
             R.mipmap.tab_two
@@ -39,15 +41,22 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
         Fragment fr;
         String tag;
         Bundle args = new Bundle();
-        if (position==1){
+        if (position == 1) {
             tag = ImagePagerFragment.class.getSimpleName();
-            fr = new ImagePagerFragment();
+            Constants.setImageArray();
+            if (fragmentOne == null) {
+                fragmentOne = new ImagePagerFragment();
+            }
+            fr = fragmentOne;
             args.putInt(IMAGE_POSITION, position);
 
-        }
-        else{
+        } else {
             tag = ImageGridFragment.class.getSimpleName();
-            fr = new ImageGridFragment();
+            Constants.setImageArray();
+            if (fragmentTwo == null) {
+                fragmentTwo = new ImageGridFragment();
+            }
+            fr = fragmentTwo;
             args.putInt(FRAGMENT_INDEX, position);
         }
         fr.setArguments(args);

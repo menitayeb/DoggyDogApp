@@ -25,6 +25,7 @@ public class SimpleImageActivity extends FragmentActivity {
             case ImageGridFragment.INDEX:
                 tag = ImageGridFragment.class.getSimpleName();
                 fr = getSupportFragmentManager().findFragmentByTag(tag);
+                Constants.setImageArray();
                 if (fr == null) {
                     fr = new ImageGridFragment();
                 }
@@ -33,10 +34,11 @@ public class SimpleImageActivity extends FragmentActivity {
             case ImagePagerFragment.INDEX:
                 tag = ImagePagerFragment.class.getSimpleName();
                 fr = getSupportFragmentManager().findFragmentByTag(tag);
+                Constants.setImageArray();
                 if (fr == null) {
                     fr = new ImagePagerFragment();
-                    fr.setArguments(getIntent().getExtras());
                 }
+                fr.setArguments(getIntent().getExtras());
                 titleRes = R.string.ac_name_image_pager;
                 break;
         }

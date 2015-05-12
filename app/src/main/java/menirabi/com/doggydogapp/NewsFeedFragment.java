@@ -21,6 +21,7 @@ public class NewsFeedFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = "NewsFeedFragment";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -37,12 +38,8 @@ public class NewsFeedFragment extends Fragment {
      * @return A new instance of fragment NewsFeedFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NewsFeedFragment newInstance(String param1, String param2) {
+    public static NewsFeedFragment newInstance() {
         NewsFeedFragment fragment = new NewsFeedFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 

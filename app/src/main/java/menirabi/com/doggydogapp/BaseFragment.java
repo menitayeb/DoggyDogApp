@@ -19,9 +19,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 // import com.nostra13.universalimageloader.core.sample.R;
 
 /**
@@ -36,20 +33,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
+      //  inflater.inflate(R.menu.main, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_clear_memory_cache:
-                ImageLoader.getInstance().clearMemoryCache();
-                return true;
-            case R.id.item_clear_disc_cache:
-                ImageLoader.getInstance().clearDiskCache();
-                return true;
-            default:
-                return false;
-        }
-    }
+
 }

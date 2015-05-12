@@ -36,8 +36,8 @@ public class ImagePagerFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         options = new DisplayImageOptions.Builder()
-               // .showImageForEmptyUri(R.drawable.ic_empty)
-            //    .showImageOnFail(R.drawable.ic_error)
+                .showImageForEmptyUri(R.mipmap.ic_empty)
+                .showImageOnFail(R.mipmap.ic_error)
                 .resetViewBeforeLoading(true)
                 .cacheOnDisk(true)
                 .imageScaleType(ImageScaleType.EXACTLY)

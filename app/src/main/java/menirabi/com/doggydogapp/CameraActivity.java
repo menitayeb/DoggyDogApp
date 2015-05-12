@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -16,17 +17,22 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class CameraActivity extends Activity {
     private static final String TAG = "CameraActivity";
@@ -39,6 +45,12 @@ public class CameraActivity extends Activity {
     Button buttonClick2;
     Button buttonClick6;
     Context context;
+    private final ShutterCallback shutterCallback = new ShutterCallback() {
+        public void onShutter() {
+            AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            mgr.playSoundEffect(AudioManager.FLAG_PLAY_SOUND);
+        }
+    };
     //some comments
 
     @Override
@@ -57,6 +69,12 @@ public class CameraActivity extends Activity {
         ((FrameLayout) findViewById(R.id.layout)).addView(preview);
         preview.setKeepScreenOn(true);
 
+        final ShutterCallback shutterCallback = new ShutterCallback() {
+            public void onShutter() {
+                Log.d(TAG, "onShutter'd");
+            }
+        };
+
         buttonClick1 = (Button) findViewById(R.id.buttonClick1);
         buttonClick1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,15 +84,27 @@ public class CameraActivity extends Activity {
             }
         });
 
+        Spinner spinner = (Spinner) findViewById(R.id.buttonClick4);
+        CustomAdapter<String> adapter = new CustomAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, new String[] {"Entry 1", "Entry 2", "Entry 3"});
+        spinner.setAdapter(adapter);
+
         buttonClick6 = (Button) findViewById(R.id.buttonClick6);
         buttonClick6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                List<String> pList = camera.getParameters().getSupportedFlashModes();
+                Camera.Parameters p =camera.getParameters();
                 if(context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)){
-                    Camera.Parameters p = camera.getParameters();
-                    p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    if (pList.contains(Camera.Parameters.FLASH_MODE_TORCH) && (android.os.Build.MANUFACTURER.contains("htc"))) {
+                        p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                    }
+                    else
+                    if (pList.contains(Camera.Parameters.FLASH_MODE_ON)) {
+                        p.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                    }
                     camera.setParameters(p);
-                    Toast.makeText(context,"Flash On",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Flash On",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(context,"No flash on device",Toast.LENGTH_LONG).show();
@@ -120,25 +150,25 @@ public class CameraActivity extends Activity {
 
         //		buttonClick = (Button) findViewById(R.id.btnCapture);
         //
-        //		buttonClick.setOnClickListener(new OnClickListener() {
+//        		buttonClick.setOnClickListener(new OnClickListener() {
         //			public void onClick(View v) {
         ////				preview.camera.takePicture(shutterCallback, rawCallback, jpegCallback);
         //				camera.takePicture(shutterCallback, rawCallback, jpegCallback);
         //			}
         //		});
         //
-        //		buttonClick.setOnLongClickListener(new OnLongClickListener(){
-        //			@Override
-        //			public boolean onLongClick(View arg0) {
-        //				camera.autoFocus(new AutoFocusCallback(){
-        //					@Override
-        //					public void onAutoFocus(boolean arg0, Camera arg1) {
-        //						//camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-        //					}
-        //				});
-        //				return true;
-        //			}
-        //		});
+//        		buttonClick2.setOnLongClickListener(new View.OnLongClickListener(){
+//        			@Override
+//        			public boolean onLongClick(View arg0) {
+//        				camera.autoFocus(new Camera.AutoFocusCallback(){
+//        					@Override
+//        					public void onAutoFocus(boolean arg0, Camera arg1) {
+//        						camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+//        					}
+//        				});
+//        				return true;
+//        			}
+//        		});
     }
 
     @Override
@@ -162,6 +192,7 @@ public class CameraActivity extends Activity {
             camera.stopPreview();
             preview.setCamera(null);
             camera.release();
+
             camera = null;
         }
         super.onPause();
@@ -178,11 +209,11 @@ public class CameraActivity extends Activity {
         sendBroadcast(mediaScanIntent);
     }
 
-    ShutterCallback shutterCallback = new ShutterCallback() {
-        public void onShutter() {
-            //			 Log.d(TAG, "onShutter'd");
-        }
-    };
+
+
+
+
+
 
     PictureCallback rawCallback = new PictureCallback() {
         public void onPictureTaken(byte[] data, Camera camera) {
@@ -230,5 +261,19 @@ public class CameraActivity extends Activity {
             return null;
         }
 
+    }
+
+
+    private static class CustomAdapter<T> extends ArrayAdapter<String> {
+        public CustomAdapter(Context context, int textViewResourceId, String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView textView = (TextView) view.findViewById(android.R.id.text1);
+            textView.setText("");
+            return view;
+        }
     }
 }

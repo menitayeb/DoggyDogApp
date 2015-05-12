@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
@@ -27,22 +28,26 @@ public class ImageGridFragment extends AbsListViewBaseFragment {
     public static final int INDEX = 1;
 
     String[] imageUrls = Constants.IMAGES;
-
+    private ImageLoaderConfiguration config;
     DisplayImageOptions options;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         options = new DisplayImageOptions.Builder()
        //         .showImageOnLoading(R.drawable.ic_stub)
-            //    .showImageForEmptyUri(R.drawable.ic_empty)
-       //         .showImageOnFail(R.drawable.ic_error)
+                .showImageForEmptyUri(R.mipmap.ic_empty)
+                .showImageOnFail(R.mipmap.ic_error)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
+        Object o = getActivity().getApplicationContext();
+         config = new ImageLoaderConfiguration.Builder(getActivity().getApplicationContext())
+        .defaultDisplayImageOptions(options)
+        .build();
+        //ImageLoader.getInstance().init(config);
     }
 
     @Override
@@ -50,6 +55,7 @@ public class ImageGridFragment extends AbsListViewBaseFragment {
         View rootView = inflater.inflate(R.layout.fr_image_grid, container, false);
         listView = (GridView) rootView.findViewById(R.id.grid);
         ((GridView) listView).setAdapter(new ImageAdapter());
+
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -102,6 +108,7 @@ public class ImageGridFragment extends AbsListViewBaseFragment {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {
                             holder.progressBar.setProgress(0);
+                            holder.imageView.setVisibility(View.GONE);
                             holder.progressBar.setVisibility(View.VISIBLE);
                         }
 
@@ -113,6 +120,7 @@ public class ImageGridFragment extends AbsListViewBaseFragment {
                         @Override
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                             holder.progressBar.setVisibility(View.GONE);
+                            holder.imageView.setVisibility(View.VISIBLE);
                         }
                     }, new ImageLoadingProgressListener() {
                         @Override
