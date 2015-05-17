@@ -29,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.hardware.Camera.Size;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,7 +64,6 @@ public class CameraActivity extends Activity {
         act = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.camera);
         context = getBaseContext();
 
@@ -83,24 +83,26 @@ public class CameraActivity extends Activity {
         buttonClick1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+
+//                sound.playShortResource(R.raw.dogbark);
                 MediaPlayer mp;
                 barksType = getSharedPreferences("DoggyDog_BGU", MODE_PRIVATE).getInt(def, 0);
                 switch (barksType){
                     case 0:
-                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
-                        Toast.makeText(getApplicationContext(),"this is 1", Toast.LENGTH_LONG).show();
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.bark1);
+//                        Toast.makeText(getApplicationContext(),"this is 1", Toast.LENGTH_LONG).show();
                         break;
                     case 1:
-                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
-                        Toast.makeText(getApplicationContext(),"this is 2", Toast.LENGTH_LONG).show();
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.bark2);
+//                        Toast.makeText(getApplicationContext(),"this is 2", Toast.LENGTH_LONG).show();
                         break;
                     case 2:
-                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
-                        Toast.makeText(getApplicationContext(),"this is 3", Toast.LENGTH_LONG).show();
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.bark3);
+//                        Toast.makeText(getApplicationContext(),"this is 3", Toast.LENGTH_LONG).show();
                         break;
                     default:
-                        mp = MediaPlayer.create(getApplicationContext(), R.raw.dogbark);
-                        Toast.makeText(getApplicationContext(),"this is default", Toast.LENGTH_LONG).show();
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.bark1);
+//                        Toast.makeText(getApplicationContext(),"this is default", Toast.LENGTH_LONG).show();
                         break;
                 }
                 mp.start();
@@ -166,6 +168,22 @@ public class CameraActivity extends Activity {
 //STEP #2: Set the 'rotation' parameter
                 Camera.Parameters params = camera.getParameters();
                 params.setRotation(rotate);
+
+                List<Camera.Size> supportedSizes = params.getSupportedPictureSizes();
+                int max = 0;
+                int index = 0;
+
+                for (int i = 0; i < supportedSizes.size(); i++){
+                    Size s = supportedSizes.get(i);
+                    int size = s.height * s.width;
+                    if (size > max) {
+                        index = i;
+                        max = size;
+                    }
+                }
+                Camera.Size sizePicture = (supportedSizes.get(index));
+                params.setPictureSize(sizePicture.width, sizePicture.height);
+
                 camera.setParameters(params);
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
             }
@@ -207,7 +225,6 @@ public class CameraActivity extends Activity {
             camera.stopPreview();
             preview.setCamera(null);
             camera.release();
-
             camera = null;
         }
         super.onPause();

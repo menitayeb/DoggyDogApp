@@ -60,7 +60,6 @@ public final class Constants {
             "http://animalia-life.com/data_images/dog/dog4.jpg",
             "https://www.petfinder.com/wp-content/uploads/2012/11/122163343-conditioning-dog-loud-noises-632x475.jpg",
             "http://www.farrismarketing.com/wp-content/uploads/2014/07/Dog-Desktop-Wallpaper-HD.jpg",
-            "http://i.ytimg.com/vi/2XV2bVamPCI/maxresdefault.jpg",
             "http://pngimg.com/upload/dog_png2402.png",
             "https://fromthedeskofmardrag.files.wordpress.com/2014/03/dog-3.jpg",
             "http://www.petiquettedog.com/wp-content/uploads/2010/04/sadpug.jpg",
