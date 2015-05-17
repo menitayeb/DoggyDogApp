@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.authenticator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +22,10 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 
+import menirabi.com.activities.MainActivity;
+import menirabi.com.doggydogapp.R;
+import menirabi.com.doggydogapp.UILApplication;
+
 public class ConnectSocialNetwork extends Activity
 {
     public static final String              FACEBOOK_POST_DESCRIPTION = "postFacebookDescription";
@@ -33,7 +37,7 @@ public class ConnectSocialNetwork extends Activity
 
     private ProgressDialog                  m_ProgressDialog          = null;
 
-    private UILApplication               mainApp;
+    private UILApplication mainApp;
     private static Activity                 activity;
 
     private Session                         session;

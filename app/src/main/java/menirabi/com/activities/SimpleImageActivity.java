@@ -1,8 +1,13 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+
+import menirabi.com.doggydogapp.Constants;
+import menirabi.com.doggydogapp.R;
+import menirabi.com.fragments.ImageGridFragment;
+import menirabi.com.fragments.ImagePagerFragment;
 
 //import com.nostra13.universalimageloader.sample.R;
 //import com.nostra13.universalimageloader.sample.fragment.ImageGalleryFragment;

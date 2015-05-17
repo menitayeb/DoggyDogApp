@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import menirabi.com.doggydogapp.R;
+import menirabi.com.adapters.SampleFragmentPagerAdapter;
+import menirabi.com.doggydogapp.SlidingTabLayout;
 
 //import android.app.Fragment;
 

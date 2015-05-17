@@ -1,10 +1,13 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.fragments;
 
 import android.content.Intent;
 import android.widget.AbsListView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+import menirabi.com.doggydogapp.Constants;
+import menirabi.com.activities.SimpleImageActivity;
 
 //import com.nostra13.universalimageloader.sample.R;
 

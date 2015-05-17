@@ -1,10 +1,12 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.authenticator;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import menirabi.com.doggydogapp.R;
 
 
 public class SignupActivity extends ActionBarActivity {

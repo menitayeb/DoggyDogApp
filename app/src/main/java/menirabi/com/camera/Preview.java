@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.camera;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;

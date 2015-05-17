@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.fragments;
 /*******************************************************************************
  * Copyright 2011-2014 Sergey Tarasevich
  *

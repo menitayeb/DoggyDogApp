@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.authenticator;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
+
+import menirabi.com.activities.MainActivity;
+import menirabi.com.doggydogapp.R;
+import menirabi.com.doggydogapp.UILApplication;
 
 /**
  * Created by Oren on 09/03/2015.

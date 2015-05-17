@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.fragments;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,6 +18,9 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+
+import menirabi.com.doggydogapp.Constants;
+import menirabi.com.doggydogapp.R;
 //import com.nostra13.universalimageloader.sample.R;
 
 /**

@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +25,17 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import menirabi.com.adapters.MyAdapter;
+import menirabi.com.authenticator.LoginActivity;
+import menirabi.com.camera.CameraActivity;
+import menirabi.com.doggydogapp.Constants;
+import menirabi.com.doggydogapp.R;
+import menirabi.com.doggydogapp.RecyclerItemClickListener;
+import menirabi.com.doggydogapp.UILApplication;
+import menirabi.com.fragments.FragmentOne;
+import menirabi.com.fragments.NewsFeedFragment;
+import menirabi.com.fragments.SlidesFragment;
 
 public class MainActivity extends ActionBarActivity implements SlidesFragment.OnFragmentInteractionListener, FragmentOne.OnFragmentInteractionListener, NewsFeedFragment.OnFragmentInteractionListener {
 

@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.authenticator;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+
+import menirabi.com.activities.MainActivity;
+import menirabi.com.doggydogapp.R;
 
 /**
  * Created by Oren on 09/03/2015.

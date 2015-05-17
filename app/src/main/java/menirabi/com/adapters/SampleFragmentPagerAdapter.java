@@ -1,4 +1,4 @@
-package menirabi.com.doggydogapp;
+package menirabi.com.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,6 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+
+import menirabi.com.doggydogapp.Constants;
+import menirabi.com.doggydogapp.R;
+import menirabi.com.fragments.ImageGridFragment;
+import menirabi.com.fragments.ImagePagerFragment;
 
 /**
  * Created by Oren on 26/04/2015.
